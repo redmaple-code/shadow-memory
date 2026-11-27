@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shadow-memory"
+version = "0.1.0"
+description = "零依赖跨 Agent / 跨 Session 影子记忆服务（本机 SQLite + FTS5 + 单文件查看页）"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "shadow-memory" }]
+keywords = ["agent", "memory", "sqlite", "fts5", "claude-code", "codex", "zcode"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent",
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+# NOTE: runtime dependencies are intentionally empty.  Standard library only.
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+smem = "shadow_memory.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/example/shadow-memory"
+
+[tool.setuptools]
+packages = ["shadow_memory", "shadow_memory.collectors"]
+
+[tool.setuptools.package-data]
+shadow_memory = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = ["error::DeprecationWarning:shadow_memory.*"]
